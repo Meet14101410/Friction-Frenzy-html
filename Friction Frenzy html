@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Friction Frenzy</title>
+<style>
+body{font-family:Arial;text-align:center;background:#eef;}
+#game{margin:40px auto;width:500px;height:120px;background:#ccc;position:relative;border-radius:12px;}
+#box{width:40px;height:40px;background:#f66;position:absolute;left:10px;top:40px;border-radius:8px;}
+#goal{width:60px;height:60px;background:#6f6;position:absolute;right:10px;top:30px;border-radius:10px;}
+button{padding:10px 20px;font-size:16px;}
+</style>
+</head>
+<body>
+
+<h2>Friction Frenzy</h2>
+<p>Click to push the block! Higher friction = shorter slide.</p>
+
+<select id="friction">
+<option value="0.99">Low Friction</option>
+<option value="0.9">Medium Friction</option>
+<option value="0.8">High Friction</option>
+</select>
+
+<button onclick="push()">Push</button>
+
+<div id="game">
+<div id="box"></div>
+<div id="goal"></div>
+</div>
+
+<p id="msg"></p>
+
+<script>
+let box=document.getElementById("box");
+let msg=document.getElementById("msg");
+let x=10,v=0;
+
+function push(){
+x=10;v=10;msg.innerHTML="";
+let f=parseFloat(document.getElementById("friction").value);
+let run=setInterval(()=>{
+v*=f;x+=v;
+box.style.left=x+"px";
+if(x>420){clearInterval(run);msg.innerHTML="You reached the goal!";}
+if(v<0.1){clearInterval(run);if(x<420)msg.innerHTML="Stopped too early!";}
+},40);
+}
+</script>
+
+</body>
+</html>
