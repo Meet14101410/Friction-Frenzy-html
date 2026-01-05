@@ -1,0 +1,25 @@
+let box=document.getElementById("box");
+let msg=document.getElementById("msg");
+let x=10,v=0;
+
+function push(){
+  x=10; v=10;
+  msg.innerHTML="";
+  let f=parseFloat(document.getElementById("friction").value);
+
+  let run=setInterval(()=>{
+    v*=f;
+    x+=v;
+    box.style.left=x+"px";
+
+    if(x>420){
+      clearInterval(run);
+      msg.innerHTML="You reached the goal!";
+    }
+
+    if(v<0.1){
+      clearInterval(run);
+      if(x<420) msg.innerHTML="Stopped too early!";
+    }
+  },40);
+}
